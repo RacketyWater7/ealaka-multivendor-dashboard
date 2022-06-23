@@ -34,13 +34,14 @@ export const gridOrderImage = (props) => (
 );
 
 export const gridOrderStatus = (props) => (
-  <button
-    type="button"
-    style={{ background: props.StatusBg }}
-    className="text-white py-1 px-2 capitalize rounded-2xl text-md"
-  >
-    {props.Status}
-  </button>
+  <div style={{ background: props.StatusBg }} className="rounded">
+    <button
+      type="button"
+      className="text-white py-1 px-2 capitalize text-md"
+    >
+      {props.Status}
+    </button>
+  </div>
 );
 
 export const kanbanGrid = [
@@ -61,17 +62,64 @@ export const kanbanGrid = [
     keyField: 'Close',
     allowToggle: true },
 ];
-const gridEmployeeProfile = (props) => (
+const gridProductNameWithImage = (props) => (
+  <div className="flex items-center justify-around ">
+    <img style={{ width: '70px', height: '70px', marginRight: '5px' }} src={props.ProductImage} alt={props.ProductImage} />
+    <p className="text-gray-700 capitalize">{props.ProductName}</p>
+  </div>
+);
+const gridHeaderBlue = (props) => (
+  <div className="flex justify-between items-center">
+    <p className="text-blue-900 font-bold">{props.headerText}</p>
+  </div>
+);
+const gridHeaderBlack = (props) => (
+  <div className="flex justify-between items-center">
+    <p className="text-slate-700 font-bold">{props.headerText}</p>
+  </div>
+);
+const gridOrdersStatus = (props) => {
+  if (props.Status === 'Paid') {
+    return (
+      <div className="flex justify-center items-center  bg-green-200">
+        <p className="text-green-800">{props.Status}</p>
+      </div>
+    );
+  }
+  if (props.Status === 'Deactivate') {
+    return (
+      <div className="flex justify-center items-center  bg-pink-200">
+        <p className="text-pink-800">{props.Status}</p>
+      </div>
+    );
+  }
+  if (props.Status === 'Pending') {
+    return (
+      <div className="flex justify-center items-center  bg-amber-200">
+        <p className="text-amber-800">{props.Status}</p>
+      </div>
+    );
+  }
+  return (props.Status);
+};
+const gridSupplierProfile = (props) => (
   <div className="flex items-center gap-2">
     <img
       className="rounded-full w-10 h-10"
       src={props.EmployeeImage}
       alt="employee"
     />
-    <p>{props.Name}</p>
+    <div className="flex flex-col">
+      <p style={{ fontStyle: 'bold' }}>{props.Name}</p>
+      <p style={{ color: 'gray', fontStyle: 'bold' }}>{props.City}</p>
+    </div>
   </div>
 );
-
+const gridSupplierAmount = (props) => (
+  <div className="flex items-center justify-center gap-2 text-pink-600">
+    <span>${`${props.amount.toString()}`}</span>
+  </div>
+);
 const gridEmployeeCountry = (props) => (
   <div className="flex items-center justify-center gap-2">
     <GrLocation />
@@ -123,23 +171,45 @@ export const EditorData = () => (
 const customerGridImage = (props) => (
   <div className="image flex gap-4">
     <img
-      className="rounded-full w-10 h-10"
+      className="w-10 h-10"
       src={props.CustomerImage}
       alt="employee"
     />
-    <div>
+    {/* <div>
       <p>{props.CustomerName}</p>
       <p>{props.CustomerEmail}</p>
-    </div>
+    </div> */}
   </div>
 );
 
-const customerGridStatus = (props) => (
-  <div className="flex gap-2 justify-center items-center text-gray-700 capitalize">
-    <p style={{ background: props.StatusBg }} className="rounded-full h-3 w-3" />
-    <p>{props.Status}</p>
-  </div>
-);
+const customerGridStatus = (props) => {
+  // <div className="flex gap-2 justify-center items-center text-gray-700 capitalize">
+  //   <p style={{ background: props.StatusBg }} className="rounded-full h-3 w-3" />
+  //   <p>{props.Status}</p>
+  // </div>
+  if (props.Status === 'Active' || props.Status === 'Completed') {
+    return (
+      <div className="flex justify-center items-center  bg-green-200">
+        <p className="text-green-800">{props.Status}</p>
+      </div>
+    );
+  }
+  if (props.Status === 'Cancel') {
+    return (
+      <div className="flex justify-center items-center  bg-pink-200">
+        <p className="text-pink-800">{props.Status}</p>
+      </div>
+    );
+  }
+  if (props.Status === 'Pending') {
+    return (
+      <div className="flex justify-center items-center  bg-amber-200">
+        <p className="text-amber-800">{props.Status}</p>
+      </div>
+    );
+  }
+  return (props.Status);
+};
 export const areaPrimaryXAxis = {
   valueType: 'DateTime',
   labelFormat: 'MMM',
@@ -231,6 +301,7 @@ export const areaCustomSeries = [
     opacity: '0.8',
     type: 'SplineArea',
     width: '2',
+    legendShape: 'Circle',
 
   },
   {
@@ -241,6 +312,7 @@ export const areaCustomSeries = [
     opacity: '0.8',
     type: 'SplineArea',
     width: '2',
+    legendShape: 'Circle',
   },
   {
     dataSource: areaChartData[2],
@@ -250,6 +322,7 @@ export const areaCustomSeries = [
     opacity: '0.8',
     type: 'SplineArea',
     width: '2',
+    legendShape: 'Circle',
   },
   {
     dataSource: areaChartData[3],
@@ -259,6 +332,7 @@ export const areaCustomSeries = [
     opacity: '0.8',
     type: 'SplineArea',
     width: '2',
+    legendShape: 'Circle',
   },
 ];
 
@@ -415,50 +489,55 @@ export const LinePrimaryYAxis = {
 
 export const customersGrid = [
   { type: 'checkbox', width: '50' },
-  { headerText: 'Name',
-    width: '150',
-    template: customerGridImage,
-    textAlign: 'Center' },
-  { field: 'ProjectName',
-    headerText: 'Project Name',
-    width: '150',
-    textAlign: 'Center' },
-  { field: 'Status',
-    headerText: 'Status',
-    width: '130',
-    format: 'yMd',
-    textAlign: 'Center',
-    template: customerGridStatus },
   {
-    field: 'Weeks',
-    headerText: 'Weeks',
-    width: '100',
-    format: 'C2',
+    headerText: 'Image',
+    template: customerGridImage,
+    textAlign: 'Center',
+    width: '70',
+  },
+  { headerText: 'Name',
+    width: '120',
+    field: 'CustomerName',
+    // template: customerGridImage,
     textAlign: 'Center' },
-  { field: 'Budget',
-    headerText: 'Budget',
-    width: '100',
-    format: 'yMd',
+  { headerText: 'Email',
+    width: '120',
+    field: 'CustomerEmail',
+    // template: customerGridImage,
     textAlign: 'Center' },
-
-  { field: 'Location',
-    headerText: 'Location',
-    width: '150',
-    textAlign: 'Center' },
-
   { field: 'CustomerID',
-    headerText: 'Customer ID',
+    headerText: 'Phone Number',
     width: '120',
     textAlign: 'Center',
     isPrimaryKey: true,
   },
-
+  { field: 'ProjectName',
+    headerText: 'Registeration Date',
+    width: '150',
+    textAlign: 'Center' },
+  { field: 'Status',
+    headerText: 'Status',
+    width: '90',
+    format: 'yMd',
+    textAlign: 'Center',
+    template: customerGridStatus },
 ];
-
+export const employeesGrid1 = [
+  { headerText: 'Name',
+    width: '150',
+    template: gridSupplierProfile,
+    textAlign: 'Center' },
+  { field: 'amount',
+    headerText: 'Amount',
+    width: '125',
+    format: 'C2',
+    template: gridSupplierAmount,
+    textAlign: 'Center' },
+];
 export const employeesGrid = [
   { headerText: 'Employee',
     width: '150',
-    template: gridEmployeeProfile,
+    template: gridSupplierProfile,
     textAlign: 'Center' },
   { field: 'Name',
     headerText: '',
@@ -490,6 +569,85 @@ export const employeesGrid = [
     width: '125',
     textAlign: 'Center' },
 ];
+export const employeesGrid2 = [
+  { headerText: 'Order ID',
+    field: 'OrderID',
+    headerTemplate: gridHeaderBlue,
+    width: '100',
+    textAlign: 'Center' },
+  { field: 'Customer',
+    headerText: 'Customer',
+    width: '120',
+    headerTemplate: gridHeaderBlue,
+    textAlign: 'Center',
+  },
+  { headerText: 'Product',
+    field: 'Product',
+    width: '100',
+    headerTemplate: gridHeaderBlue,
+    textAlign: 'Center',
+  },
+  { field: 'Amount',
+    headerText: 'Amount',
+    headerTemplate: gridHeaderBlue,
+    format: 'C2',
+    width: '100',
+    textAlign: 'Center' },
+
+  { field: 'Supplier',
+    headerText: 'Supplier',
+    width: '100',
+    headerTemplate: gridHeaderBlack,
+    textAlign: 'Center' },
+  { field: 'Status',
+    headerText: 'Status',
+    width: '100',
+    headerTemplate: gridHeaderBlack,
+    template: gridOrdersStatus,
+    textAlign: 'Center' },
+  {
+    field: 'Rating',
+    headerText: 'Rating',
+    width: '100',
+    headerTemplate: gridHeaderBlack,
+    textAlign: 'Center' },
+];
+export const employeesGrid3 = [
+  { headerText: 'Supplier Name',
+    field: 'SupplierName',
+    headerTemplate: gridHeaderBlue,
+    width: '100',
+    textAlign: 'Center' },
+  { headerText: 'Product Name',
+    field: 'ProductName',
+    width: '100',
+    template: gridProductNameWithImage,
+    headerTemplate: gridHeaderBlue,
+    textAlign: 'Center',
+  },
+  { field: 'PromotionType',
+    headerText: 'Promotion Type',
+    width: '100',
+    headerTemplate: gridHeaderBlue,
+    textAlign: 'Center' },
+
+  { field: 'Discount',
+    headerText: 'Discount',
+    width: '40',
+    headerTemplate: gridHeaderBlue,
+    textAlign: 'Center' },
+  { field: 'ExpirationDate',
+    headerText: 'Expiration Date',
+    width: '100',
+    headerTemplate: gridHeaderBlue,
+    textAlign: 'Center' },
+  // {
+  //   field: 'Action',
+  //   headerText: 'Rating',
+  //   width: '100',
+  //   headerTemplate: gridHeaderBlack,
+  //   textAlign: 'Center' },
+];
 
 export const links = [
   {
@@ -510,11 +668,11 @@ export const links = [
         icon: <AiOutlineShoppingCart />,
       },
       {
-        name: 'employees',
+        name: 'customers',
         icon: <IoMdContacts />,
       },
       {
-        name: 'customers',
+        name: 'suppliers',
         icon: <RiContactsLine />,
       },
     ],
@@ -523,19 +681,19 @@ export const links = [
     // title: 'Apps',
     links: [
       {
-        name: 'calendar',
+        name: 'delivery guys',
         icon: <AiOutlineCalendar />,
       },
       {
-        name: 'kanban',
+        name: 'manage employees',
         icon: <BsKanban />,
       },
       {
-        name: 'editor',
+        name: 'manage zone',
         icon: <FiEdit />,
       },
       {
-        name: 'color-picker',
+        name: 'manage attributes',
         icon: <BiColorFill />,
       },
     ],
@@ -544,37 +702,29 @@ export const links = [
     // title: 'Charts',
     links: [
       {
-        name: 'line',
+        name: 'manage promo codes',
         icon: <AiOutlineStock />,
       },
       {
-        name: 'area',
+        name: 'manage categories',
         icon: <AiOutlineAreaChart />,
       },
 
       {
-        name: 'bar',
+        name: 'manage promotion',
         icon: <AiOutlineBarChart />,
       },
       {
-        name: 'pie',
+        name: 'main banner',
         icon: <FiPieChart />,
       },
       {
-        name: 'financial',
+        name: 'settings',
         icon: <RiStockLine />,
       },
       {
-        name: 'color-mapping',
+        name: 'logout',
         icon: <BsBarChart />,
-      },
-      {
-        name: 'pyramid',
-        icon: <GiLouvrePyramid />,
-      },
-      {
-        name: 'stacked',
-        icon: <AiOutlineBarChart />,
       },
     ],
   },
@@ -893,50 +1043,73 @@ export const userProfileData = [
 ];
 
 export const ordersGrid = [
+  // {
+  //   headerText: 'Image',
+  //   template: gridOrderImage,
+  //   textAlign: 'Center',
+  //   width: '120',
+  // },
   {
-    headerText: 'Image',
-    template: gridOrderImage,
-    textAlign: 'Center',
-    width: '120',
-  },
-  {
-    field: 'OrderItems',
-    headerText: 'Item',
-    width: '150',
-    editType: 'dropdownedit',
+    field: 'OrderID',
+    headerText: 'Order ID',
+    width: '80',
     textAlign: 'Center',
   },
   { field: 'CustomerName',
-    headerText: 'Customer Name',
-    width: '150',
+    headerText: 'Customer',
+    width: '100',
+    textAlign: 'Center',
+  },
+  {
+    field: 'OrderItems',
+    headerText: 'Product',
+    width: '110',
+    editType: 'dropdownedit',
     textAlign: 'Center',
   },
   {
     field: 'TotalAmount',
-    headerText: 'Total Amount',
+    headerText: 'Price',
     format: 'C2',
     textAlign: 'Center',
     editType: 'numericedit',
-    width: '150',
+    width: '70',
+  },
+  {
+    field: 'Location',
+    headerText: 'Zone',
+    width: '60',
+    textAlign: 'Center',
+  },
+  {
+    field: 'DeliveryDate',
+    headerText: 'Delivery Date',
+    width: '80',
+    textAlign: 'Center',
+  },
+  {
+    field: 'Supplier',
+    headerText: 'Supplier',
+    width: '80',
+    textAlign: 'Center',
+  },
+  {
+    field: 'DeliveryGuy',
+    headerText: 'Delivery Guy',
+    width: '80',
+    textAlign: 'Center',
   },
   {
     headerText: 'Status',
     template: gridOrderStatus,
-    field: 'OrderItems',
+    field: 'Status',
     textAlign: 'Center',
-    width: '120',
+    width: '100',
   },
   {
-    field: 'OrderID',
-    headerText: 'Order ID',
-    width: '120',
-    textAlign: 'Center',
-  },
-
-  {
-    field: 'Location',
-    headerText: 'Location',
-    width: '150',
+    field: 'Rating',
+    headerText: 'Rating',
+    width: '50',
     textAlign: 'Center',
   },
 ];
@@ -1502,7 +1675,159 @@ export const customersData = [
   },
 
 ];
-
+export const employeesData1 = [
+  {
+    amount: '123.00',
+    Name: 'Nirav Joshi',
+    City: 'New York',
+    // Name: 'Nancy Davolio',
+    // Title: 'Sales Representative',
+    // HireDate: '01/02/2021',
+    // Country: 'USA',
+    // ReportsTo: 'Carson',
+    EmployeeImage:
+    avatar3,
+  },
+  {
+    amount: '243.00',
+    Name: 'Nasimiyu Danai',
+    City: 'New York',
+    // Title: 'Marketing Head',
+    // HireDate: '01/02/2021',
+    // Country: 'USA',
+    // ReportsTo: 'Carson',
+    EmployeeImage:
+      avatar3,
+  },
+  {
+    amount: '332.00',
+    Name: 'Iulia Albu',
+    City: 'New York',
+    // Title: 'HR',
+    // HireDate: '01/02/2021',
+    // Country: 'USA',
+    // ReportsTo: 'Carson',
+    EmployeeImage:
+      avatar4,
+  },
+  {
+    amount: '432.00',
+    Name: 'Siegbert Gottfried',
+    City: 'New York',
+    // Title: 'Marketing Head',
+    // HireDate: '01/02/2021',
+    // Country: 'USA',
+    // ReportsTo: 'Carson',
+    EmployeeImage:
+      avatar,
+  },
+];
+export const employeesData2 = [
+  {
+    OrderID: '#12345',
+    Customer: 'Nancy Davolio',
+    Product: 'Sales Representative',
+    Amount: '234',
+    Supplier: 'John Balleric',
+    Status: 'Deactivate',
+    Rating: '4.5',
+  },
+  {
+    OrderID: '#12345',
+    Customer: 'Nasimiyu Danai',
+    Product: 'Marketing Head',
+    Amount: '23',
+    Supplier: 'John Balleric',
+    Status: 'Paid',
+    Rating: '4.5',
+  },
+  {
+    OrderID: '#12345',
+    Customer: 'Iulia Albu',
+    Product: 'HR',
+    Amount: '234',
+    Supplier: 'John Balleric',
+    Status: 'Pending',
+    Rating: '4.5',
+  },
+  {
+    OrderID: '#12345',
+    Customer: 'Siegbert Gottfried',
+    Product: 'Marketing Head',
+    Amount: '65',
+    Supplier: 'John Balleric',
+    Status: 'Paid',
+    Rating: '4.5',
+  },
+  {
+    OrderID: '#12345',
+    Customer: 'Omar Darobe',
+    Product: 'HR',
+    Amount: '44',
+    Supplier: 'John Balleric',
+    Status: 'Pending',
+    Rating: '4.5',
+  },
+  {
+    OrderID: '#12345',
+    Customer: 'Penjani Inyene',
+    Product: 'Marketing Head',
+    Amount: '453',
+    Supplier: 'John Balleric',
+    Status: 'Deactivate',
+    Rating: '4.5',
+  },
+];
+export const employeesData3 = [
+  {
+    SupplierName: 'Nancy Davolio',
+    ProductName: 'Sales Representative',
+    ProductImage: '/images/broccoli.png',
+    PromotionType: 'Discount',
+    Discount: '25%',
+    ExpirationDate: '05/30/2022 05/30/2022',
+  },
+  {
+    SupplierName: 'Nancy Davolio',
+    ProductName: 'Sales Representative',
+    ProductImage: '/images/broccoli.png',
+    PromotionType: 'Discount',
+    Discount: '25%',
+    ExpirationDate: '05/30/2022 05/30/2022',
+  },
+  {
+    SupplierName: 'Nancy Davolio',
+    ProductName: 'Sales Representative',
+    ProductImage: '/images/broccoli.png',
+    PromotionType: 'Discount',
+    Discount: '25%',
+    ExpirationDate: '05/30/2022 05/30/2022',
+  },
+  {
+    SupplierName: 'Nancy Davolio',
+    ProductName: 'Sales Representative',
+    ProductImage: '/images/broccoli.png',
+    PromotionType: 'Discount',
+    Discount: '25%',
+    ExpirationDate: '05/30/2022 05/30/2022',
+  },
+  {
+    SupplierName: 'Nancy Davolio',
+    ProductName: 'Sales Representative',
+    ProductImage: '/images/broccoli.png',
+    PromotionType: 'Discount',
+    Discount: '25%',
+    ExpirationDate: '05/30/2022 05/30/2022',
+  },
+  {
+    SupplierName: 'Nancy Davolio',
+    ProductName: 'Sales Representative',
+    ProductImage: '/images/broccoli.png',
+    PromotionType: 'Discount',
+    Discount: '25%',
+    ExpirationDate: '05/30/2022 05/30/2022',
+  },
+];
 export const employeesData = [
   {
     EmployeeID: 1,
@@ -2147,12 +2472,15 @@ export const ordersData = [
   {
     OrderID: 10248,
     CustomerName: 'Vinet',
-
     TotalAmount: 32.38,
     OrderItems: 'Fresh Tomato',
     Location: 'USA',
     Status: 'pending',
     StatusBg: '#FB9678',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     ProductImage:
       product6,
   },
@@ -2161,8 +2489,12 @@ export const ordersData = [
     CustomerName: 'Carson Darrin',
     TotalAmount: 56.34,
     OrderItems: 'Butter Scotch',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Location: 'Delhi',
-    Status: 'complete',
+    Status: 'paid',
     StatusBg: '#8BE78B',
     ProductImage:
       product5,
@@ -2172,6 +2504,10 @@ export const ordersData = [
     CustomerName: 'Fran Perez',
     TotalAmount: 93.31,
     OrderItems: 'Candy Gucci',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Location: 'New York',
     Status: 'active',
     StatusBg: '#03C9D7',
@@ -2183,6 +2519,10 @@ export const ordersData = [
     CustomerName: 'Anika Viseer',
     TotalAmount: 93.31,
     OrderItems: 'Night Lamp',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Location: 'Germany',
     Status: 'canceled',
     StatusBg: '#FF5C8E',
@@ -2194,6 +2534,10 @@ export const ordersData = [
     CustomerName: 'Miron Vitold',
     TotalAmount: 23.99,
     OrderItems: 'Healthcare Erbology',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Location: 'Spain',
     Status: 'rejected',
     StatusBg: 'red',
@@ -2203,6 +2547,10 @@ export const ordersData = [
   {
     OrderID: 94757,
     CustomerName: 'Omar Darobe',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     TotalAmount: 95.99,
     OrderItems: 'Makeup Lancome Rouge',
     Location: 'USA',
@@ -2219,16 +2567,24 @@ export const ordersData = [
     Location: 'USA',
     Status: 'active',
     StatusBg: '#03C9D7',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     ProductImage:
       product3,
   },
   {
     OrderID: 845954,
     CustomerName: 'Penjani',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     TotalAmount: 59.99,
     OrderItems: 'Headphone',
     Location: 'USA',
-    Status: 'complete',
+    Status: 'paid',
     StatusBg: '#8BE78B',
     ProductImage:
       product4,
@@ -2237,6 +2593,10 @@ export const ordersData = [
     OrderID: 845954,
     CustomerName: 'Jie Yan',
     TotalAmount: 87.99,
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     OrderItems: 'Shoes',
     Location: 'USA',
     Status: 'pending',
@@ -2251,6 +2611,10 @@ export const ordersData = [
     OrderItems: 'Watch',
     Location: 'USA',
     Status: 'canceled',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     StatusBg: '#FF5C8E',
     ProductImage:
       'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/pop-womens-garmin-watches-1641919013.jpg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*',
@@ -2260,6 +2624,10 @@ export const ordersData = [
     CustomerName: 'Miron',
     TotalAmount: 87.99,
     OrderItems: 'Ice Cream',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Location: 'USA',
     Status: 'active',
     StatusBg: '#03C9D7',
@@ -2272,7 +2640,11 @@ export const ordersData = [
     TotalAmount: 84.99,
     OrderItems: 'Pan Cake',
     Location: 'Delhi',
-    Status: 'complete',
+    Status: 'paid',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     StatusBg: '#8BE78B',
     ProductImage:
       'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80',
@@ -2281,6 +2653,206 @@ export const ordersData = [
     OrderID: 874534,
     CustomerName: 'Danai',
     TotalAmount: 122.99,
+    OrderItems: 'Watch',
+    Location: 'USA',
+    Status: 'canceled',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    StatusBg: '#FF5C8E',
+    ProductImage:
+      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/pop-womens-garmin-watches-1641919013.jpg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*',
+  },
+  {
+    OrderID: 10248,
+    CustomerName: 'Vinet',
+
+    TotalAmount: 32.38,
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    OrderItems: 'Fresh Tomato',
+    Location: 'USA',
+    Status: 'pending',
+    StatusBg: '#FB9678',
+    ProductImage:
+      product6,
+  },
+  {
+    OrderID: 345653,
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    CustomerName: 'Carson Darrin',
+    TotalAmount: 56.34,
+    OrderItems: 'Butter Scotch',
+    Location: 'Delhi',
+    Status: 'paid',
+    StatusBg: '#8BE78B',
+    ProductImage:
+      product5,
+  },
+  {
+    OrderID: 390457,
+    CustomerName: 'Fran Perez',
+    TotalAmount: 93.31,
+    OrderItems: 'Candy Gucci',
+    Location: 'New York',
+    Status: 'active',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    StatusBg: '#03C9D7',
+    ProductImage:
+      product7,
+  },
+  {
+    OrderID: 893486,
+    CustomerName: 'Anika Viseer',
+    TotalAmount: 93.31,
+    OrderItems: 'Night Lamp',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    Location: 'Germany',
+    Status: 'canceled',
+    StatusBg: '#FF5C8E',
+    ProductImage:
+      product4,
+  },
+  {
+    OrderID: 748975,
+    CustomerName: 'Miron Vitold',
+    TotalAmount: 23.99,
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    OrderItems: 'Healthcare Erbology',
+    Location: 'Spain',
+    Status: 'rejected',
+    StatusBg: 'red',
+    ProductImage:
+      product1,
+  },
+  {
+    OrderID: 94757,
+    CustomerName: 'Omar Darobe',
+    TotalAmount: 95.99,
+    OrderItems: 'Makeup Lancome Rouge',
+    Location: 'USA',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    Status: 'canceled',
+    StatusBg: '#FF5C8E',
+    ProductImage:
+      product2,
+  },
+  {
+    OrderID: 944895,
+    CustomerName: 'Lulia albu',
+    TotalAmount: 17.99,
+    OrderItems: 'Skincare',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    Location: 'USA',
+    Status: 'active',
+    StatusBg: '#03C9D7',
+    ProductImage:
+      product3,
+  },
+  {
+    OrderID: 845954,
+    CustomerName: 'Penjani',
+    TotalAmount: 59.99,
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    OrderItems: 'Headphone',
+    Location: 'USA',
+    Status: 'paid',
+    StatusBg: '#8BE78B',
+    ProductImage:
+      product4,
+  },
+  {
+    OrderID: 845954,
+    CustomerName: 'Jie Yan',
+    TotalAmount: 87.99,
+    OrderItems: 'Shoes',
+    Location: 'USA',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    Status: 'pending',
+    StatusBg: '#FB9678',
+    ProductImage:
+      'https://cdn.shopclues.com/images1/thumbnails/104158/320/320/148648730-104158193-1592481791.jpg',
+  },
+  {
+    OrderID: 874534,
+    CustomerName: 'Danai',
+    TotalAmount: 122.99,
+    OrderItems: 'Watch',
+    Location: 'USA',
+    Status: 'canceled',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    StatusBg: '#FF5C8E',
+    ProductImage:
+      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/pop-womens-garmin-watches-1641919013.jpg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*',
+  },
+  {
+    OrderID: 38489,
+    CustomerName: 'Miron',
+    TotalAmount: 87.99,
+    OrderItems: 'Ice Cream',
+    Location: 'USA',
+    Status: 'active',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    StatusBg: '#03C9D7',
+    ProductImage:
+      'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/dairy-free-ice-cream-eae372d.jpg',
+  },
+  {
+    OrderID: 24546,
+    CustomerName: 'Frank',
+    TotalAmount: 84.99,
+    OrderItems: 'Pan Cake',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    Location: 'Delhi',
+    Status: 'paid',
+    StatusBg: '#8BE78B',
+    ProductImage:
+      'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80',
+  },
+  {
+    OrderID: 874534,
+    CustomerName: 'Danai',
+    TotalAmount: 122.99,
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     OrderItems: 'Watch',
     Location: 'USA',
     Status: 'canceled',
@@ -2293,6 +2865,10 @@ export const ordersData = [
     CustomerName: 'Vinet',
 
     TotalAmount: 32.38,
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     OrderItems: 'Fresh Tomato',
     Location: 'USA',
     Status: 'pending',
@@ -2304,15 +2880,23 @@ export const ordersData = [
     OrderID: 345653,
     CustomerName: 'Carson Darrin',
     TotalAmount: 56.34,
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     OrderItems: 'Butter Scotch',
     Location: 'Delhi',
-    Status: 'complete',
+    Status: 'paid',
     StatusBg: '#8BE78B',
     ProductImage:
       product5,
   },
   {
     OrderID: 390457,
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     CustomerName: 'Fran Perez',
     TotalAmount: 93.31,
     OrderItems: 'Candy Gucci',
@@ -2327,6 +2911,10 @@ export const ordersData = [
     CustomerName: 'Anika Viseer',
     TotalAmount: 93.31,
     OrderItems: 'Night Lamp',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Location: 'Germany',
     Status: 'canceled',
     StatusBg: '#FF5C8E',
@@ -2339,6 +2927,10 @@ export const ordersData = [
     TotalAmount: 23.99,
     OrderItems: 'Healthcare Erbology',
     Location: 'Spain',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Status: 'rejected',
     StatusBg: 'red',
     ProductImage:
@@ -2349,6 +2941,10 @@ export const ordersData = [
     CustomerName: 'Omar Darobe',
     TotalAmount: 95.99,
     OrderItems: 'Makeup Lancome Rouge',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Location: 'USA',
     Status: 'canceled',
     StatusBg: '#FF5C8E',
@@ -2361,6 +2957,10 @@ export const ordersData = [
     TotalAmount: 17.99,
     OrderItems: 'Skincare',
     Location: 'USA',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Status: 'active',
     StatusBg: '#03C9D7',
     ProductImage:
@@ -2372,7 +2972,11 @@ export const ordersData = [
     TotalAmount: 59.99,
     OrderItems: 'Headphone',
     Location: 'USA',
-    Status: 'complete',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    Status: 'paid',
     StatusBg: '#8BE78B',
     ProductImage:
       product4,
@@ -2383,6 +2987,10 @@ export const ordersData = [
     TotalAmount: 87.99,
     OrderItems: 'Shoes',
     Location: 'USA',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Status: 'pending',
     StatusBg: '#FB9678',
     ProductImage:
@@ -2393,6 +3001,10 @@ export const ordersData = [
     CustomerName: 'Danai',
     TotalAmount: 122.99,
     OrderItems: 'Watch',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Location: 'USA',
     Status: 'canceled',
     StatusBg: '#FF5C8E',
@@ -2405,6 +3017,10 @@ export const ordersData = [
     TotalAmount: 87.99,
     OrderItems: 'Ice Cream',
     Location: 'USA',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Status: 'active',
     StatusBg: '#03C9D7',
     ProductImage:
@@ -2415,8 +3031,12 @@ export const ordersData = [
     CustomerName: 'Frank',
     TotalAmount: 84.99,
     OrderItems: 'Pan Cake',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Location: 'Delhi',
-    Status: 'complete',
+    Status: 'paid',
     StatusBg: '#8BE78B',
     ProductImage:
       'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80',
@@ -2427,6 +3047,206 @@ export const ordersData = [
     TotalAmount: 122.99,
     OrderItems: 'Watch',
     Location: 'USA',
+    Status: 'canceled',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    StatusBg: '#FF5C8E',
+    ProductImage:
+      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/pop-womens-garmin-watches-1641919013.jpg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*',
+  },
+  {
+    OrderID: 10248,
+    CustomerName: 'Vinet',
+
+    TotalAmount: 32.38,
+    OrderItems: 'Fresh Tomato',
+    Location: 'USA',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    Status: 'pending',
+    StatusBg: '#FB9678',
+    ProductImage:
+      product6,
+  },
+  {
+    OrderID: 345653,
+    CustomerName: 'Carson Darrin',
+    TotalAmount: 56.34,
+    OrderItems: 'Butter Scotch',
+    Location: 'Delhi',
+    Status: 'paid',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    StatusBg: '#8BE78B',
+    ProductImage:
+      product5,
+  },
+  {
+    OrderID: 390457,
+    CustomerName: 'Fran Perez',
+    TotalAmount: 93.31,
+    OrderItems: 'Candy Gucci',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    Location: 'New York',
+    Status: 'active',
+    StatusBg: '#03C9D7',
+    ProductImage:
+      product7,
+  },
+  {
+    OrderID: 893486,
+    CustomerName: 'Anika Viseer',
+    TotalAmount: 93.31,
+    OrderItems: 'Night Lamp',
+    Location: 'Germany',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    Status: 'canceled',
+    StatusBg: '#FF5C8E',
+    ProductImage:
+      product4,
+  },
+  {
+    OrderID: 748975,
+    CustomerName: 'Miron Vitold',
+    TotalAmount: 23.99,
+    OrderItems: 'Healthcare Erbology',
+    Location: 'Spain',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    Status: 'rejected',
+    StatusBg: 'red',
+    ProductImage:
+      product1,
+  },
+  {
+    OrderID: 94757,
+    CustomerName: 'Omar Darobe',
+    TotalAmount: 95.99,
+    OrderItems: 'Makeup Lancome Rouge',
+    Location: 'USA',
+    Status: 'canceled',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    StatusBg: '#FF5C8E',
+    ProductImage:
+      product2,
+  },
+  {
+    OrderID: 944895,
+    CustomerName: 'Lulia albu',
+    TotalAmount: 17.99,
+    OrderItems: 'Skincare',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    Location: 'USA',
+    Status: 'active',
+    StatusBg: '#03C9D7',
+    ProductImage:
+      product3,
+  },
+  {
+    OrderID: 845954,
+    CustomerName: 'Penjani',
+    TotalAmount: 59.99,
+    OrderItems: 'Headphone',
+    Location: 'USA',
+    Status: 'paid',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    StatusBg: '#8BE78B',
+    ProductImage:
+      product4,
+  },
+  {
+    OrderID: 845954,
+    CustomerName: 'Jie Yan',
+    TotalAmount: 87.99,
+    OrderItems: 'Shoes',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    Location: 'USA',
+    Status: 'pending',
+    StatusBg: '#FB9678',
+    ProductImage:
+      'https://cdn.shopclues.com/images1/thumbnails/104158/320/320/148648730-104158193-1592481791.jpg',
+  },
+  {
+    OrderID: 874534,
+    CustomerName: 'Danai',
+    TotalAmount: 122.99,
+    OrderItems: 'Watch',
+    Location: 'USA',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    Status: 'canceled',
+    StatusBg: '#FF5C8E',
+    ProductImage:
+      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/pop-womens-garmin-watches-1641919013.jpg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*',
+  },
+  {
+    OrderID: 38489,
+    CustomerName: 'Miron',
+    TotalAmount: 87.99,
+    OrderItems: 'Ice Cream',
+    Location: 'USA',
+    Status: 'active',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    StatusBg: '#03C9D7',
+    ProductImage:
+      'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/dairy-free-ice-cream-eae372d.jpg',
+  },
+  {
+    OrderID: 24546,
+    CustomerName: 'Frank',
+    TotalAmount: 84.99,
+    OrderItems: 'Pan Cake',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    Location: 'Delhi',
+    Status: 'paid',
+    StatusBg: '#8BE78B',
+    ProductImage:
+      'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80',
+  },
+  {
+    OrderID: 874534,
+    CustomerName: 'Danai',
+    TotalAmount: 122.99,
+    OrderItems: 'Watch',
+    Location: 'USA',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Status: 'canceled',
     StatusBg: '#FF5C8E',
     ProductImage:
@@ -2440,6 +3260,10 @@ export const ordersData = [
     OrderItems: 'Fresh Tomato',
     Location: 'USA',
     Status: 'pending',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     StatusBg: '#FB9678',
     ProductImage:
       product6,
@@ -2450,7 +3274,11 @@ export const ordersData = [
     TotalAmount: 56.34,
     OrderItems: 'Butter Scotch',
     Location: 'Delhi',
-    Status: 'complete',
+    Status: 'paid',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     StatusBg: '#8BE78B',
     ProductImage:
       product5,
@@ -2461,6 +3289,10 @@ export const ordersData = [
     TotalAmount: 93.31,
     OrderItems: 'Candy Gucci',
     Location: 'New York',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Status: 'active',
     StatusBg: '#03C9D7',
     ProductImage:
@@ -2473,6 +3305,10 @@ export const ordersData = [
     OrderItems: 'Night Lamp',
     Location: 'Germany',
     Status: 'canceled',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     StatusBg: '#FF5C8E',
     ProductImage:
       product4,
@@ -2484,6 +3320,10 @@ export const ordersData = [
     OrderItems: 'Healthcare Erbology',
     Location: 'Spain',
     Status: 'rejected',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     StatusBg: 'red',
     ProductImage:
       product1,
@@ -2495,6 +3335,10 @@ export const ordersData = [
     OrderItems: 'Makeup Lancome Rouge',
     Location: 'USA',
     Status: 'canceled',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     StatusBg: '#FF5C8E',
     ProductImage:
       product2,
@@ -2504,6 +3348,10 @@ export const ordersData = [
     CustomerName: 'Lulia albu',
     TotalAmount: 17.99,
     OrderItems: 'Skincare',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Location: 'USA',
     Status: 'active',
     StatusBg: '#03C9D7',
@@ -2516,7 +3364,11 @@ export const ordersData = [
     TotalAmount: 59.99,
     OrderItems: 'Headphone',
     Location: 'USA',
-    Status: 'complete',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
+    Status: 'paid',
     StatusBg: '#8BE78B',
     ProductImage:
       product4,
@@ -2528,6 +3380,10 @@ export const ordersData = [
     OrderItems: 'Shoes',
     Location: 'USA',
     Status: 'pending',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     StatusBg: '#FB9678',
     ProductImage:
       'https://cdn.shopclues.com/images1/thumbnails/104158/320/320/148648730-104158193-1592481791.jpg',
@@ -2537,6 +3393,10 @@ export const ordersData = [
     CustomerName: 'Danai',
     TotalAmount: 122.99,
     OrderItems: 'Watch',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Location: 'USA',
     Status: 'canceled',
     StatusBg: '#FF5C8E',
@@ -2549,6 +3409,10 @@ export const ordersData = [
     TotalAmount: 87.99,
     OrderItems: 'Ice Cream',
     Location: 'USA',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     Status: 'active',
     StatusBg: '#03C9D7',
     ProductImage:
@@ -2558,9 +3422,13 @@ export const ordersData = [
     OrderID: 24546,
     CustomerName: 'Frank',
     TotalAmount: 84.99,
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     OrderItems: 'Pan Cake',
     Location: 'Delhi',
-    Status: 'complete',
+    Status: 'paid',
     StatusBg: '#8BE78B',
     ProductImage:
       'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80',
@@ -2568,294 +3436,10 @@ export const ordersData = [
   {
     OrderID: 874534,
     CustomerName: 'Danai',
-    TotalAmount: 122.99,
-    OrderItems: 'Watch',
-    Location: 'USA',
-    Status: 'canceled',
-    StatusBg: '#FF5C8E',
-    ProductImage:
-      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/pop-womens-garmin-watches-1641919013.jpg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*',
-  },
-  {
-    OrderID: 10248,
-    CustomerName: 'Vinet',
-
-    TotalAmount: 32.38,
-    OrderItems: 'Fresh Tomato',
-    Location: 'USA',
-    Status: 'pending',
-    StatusBg: '#FB9678',
-    ProductImage:
-      product6,
-  },
-  {
-    OrderID: 345653,
-    CustomerName: 'Carson Darrin',
-    TotalAmount: 56.34,
-    OrderItems: 'Butter Scotch',
-    Location: 'Delhi',
-    Status: 'complete',
-    StatusBg: '#8BE78B',
-    ProductImage:
-      product5,
-  },
-  {
-    OrderID: 390457,
-    CustomerName: 'Fran Perez',
-    TotalAmount: 93.31,
-    OrderItems: 'Candy Gucci',
-    Location: 'New York',
-    Status: 'active',
-    StatusBg: '#03C9D7',
-    ProductImage:
-      product7,
-  },
-  {
-    OrderID: 893486,
-    CustomerName: 'Anika Viseer',
-    TotalAmount: 93.31,
-    OrderItems: 'Night Lamp',
-    Location: 'Germany',
-    Status: 'canceled',
-    StatusBg: '#FF5C8E',
-    ProductImage:
-      product4,
-  },
-  {
-    OrderID: 748975,
-    CustomerName: 'Miron Vitold',
-    TotalAmount: 23.99,
-    OrderItems: 'Healthcare Erbology',
-    Location: 'Spain',
-    Status: 'rejected',
-    StatusBg: 'red',
-    ProductImage:
-      product1,
-  },
-  {
-    OrderID: 94757,
-    CustomerName: 'Omar Darobe',
-    TotalAmount: 95.99,
-    OrderItems: 'Makeup Lancome Rouge',
-    Location: 'USA',
-    Status: 'canceled',
-    StatusBg: '#FF5C8E',
-    ProductImage:
-      product2,
-  },
-  {
-    OrderID: 944895,
-    CustomerName: 'Lulia albu',
-    TotalAmount: 17.99,
-    OrderItems: 'Skincare',
-    Location: 'USA',
-    Status: 'active',
-    StatusBg: '#03C9D7',
-    ProductImage:
-      product3,
-  },
-  {
-    OrderID: 845954,
-    CustomerName: 'Penjani',
-    TotalAmount: 59.99,
-    OrderItems: 'Headphone',
-    Location: 'USA',
-    Status: 'complete',
-    StatusBg: '#8BE78B',
-    ProductImage:
-      product4,
-  },
-  {
-    OrderID: 845954,
-    CustomerName: 'Jie Yan',
-    TotalAmount: 87.99,
-    OrderItems: 'Shoes',
-    Location: 'USA',
-    Status: 'pending',
-    StatusBg: '#FB9678',
-    ProductImage:
-      'https://cdn.shopclues.com/images1/thumbnails/104158/320/320/148648730-104158193-1592481791.jpg',
-  },
-  {
-    OrderID: 874534,
-    CustomerName: 'Danai',
-    TotalAmount: 122.99,
-    OrderItems: 'Watch',
-    Location: 'USA',
-    Status: 'canceled',
-    StatusBg: '#FF5C8E',
-    ProductImage:
-      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/pop-womens-garmin-watches-1641919013.jpg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*',
-  },
-  {
-    OrderID: 38489,
-    CustomerName: 'Miron',
-    TotalAmount: 87.99,
-    OrderItems: 'Ice Cream',
-    Location: 'USA',
-    Status: 'active',
-    StatusBg: '#03C9D7',
-    ProductImage:
-      'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/dairy-free-ice-cream-eae372d.jpg',
-  },
-  {
-    OrderID: 24546,
-    CustomerName: 'Frank',
-    TotalAmount: 84.99,
-    OrderItems: 'Pan Cake',
-    Location: 'Delhi',
-    Status: 'complete',
-    StatusBg: '#8BE78B',
-    ProductImage:
-      'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80',
-  },
-  {
-    OrderID: 874534,
-    CustomerName: 'Danai',
-    TotalAmount: 122.99,
-    OrderItems: 'Watch',
-    Location: 'USA',
-    Status: 'canceled',
-    StatusBg: '#FF5C8E',
-    ProductImage:
-      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/pop-womens-garmin-watches-1641919013.jpg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*',
-  },
-  {
-    OrderID: 10248,
-    CustomerName: 'Vinet',
-
-    TotalAmount: 32.38,
-    OrderItems: 'Fresh Tomato',
-    Location: 'USA',
-    Status: 'pending',
-    StatusBg: '#FB9678',
-    ProductImage:
-      product6,
-  },
-  {
-    OrderID: 345653,
-    CustomerName: 'Carson Darrin',
-    TotalAmount: 56.34,
-    OrderItems: 'Butter Scotch',
-    Location: 'Delhi',
-    Status: 'complete',
-    StatusBg: '#8BE78B',
-    ProductImage:
-      product5,
-  },
-  {
-    OrderID: 390457,
-    CustomerName: 'Fran Perez',
-    TotalAmount: 93.31,
-    OrderItems: 'Candy Gucci',
-    Location: 'New York',
-    Status: 'active',
-    StatusBg: '#03C9D7',
-    ProductImage:
-      product7,
-  },
-  {
-    OrderID: 893486,
-    CustomerName: 'Anika Viseer',
-    TotalAmount: 93.31,
-    OrderItems: 'Night Lamp',
-    Location: 'Germany',
-    Status: 'canceled',
-    StatusBg: '#FF5C8E',
-    ProductImage:
-      product4,
-  },
-  {
-    OrderID: 748975,
-    CustomerName: 'Miron Vitold',
-    TotalAmount: 23.99,
-    OrderItems: 'Healthcare Erbology',
-    Location: 'Spain',
-    Status: 'rejected',
-    StatusBg: 'red',
-    ProductImage:
-      product1,
-  },
-  {
-    OrderID: 94757,
-    CustomerName: 'Omar Darobe',
-    TotalAmount: 95.99,
-    OrderItems: 'Makeup Lancome Rouge',
-    Location: 'USA',
-    Status: 'canceled',
-    StatusBg: '#FF5C8E',
-    ProductImage:
-      product2,
-  },
-  {
-    OrderID: 944895,
-    CustomerName: 'Lulia albu',
-    TotalAmount: 17.99,
-    OrderItems: 'Skincare',
-    Location: 'USA',
-    Status: 'active',
-    StatusBg: '#03C9D7',
-    ProductImage:
-      product3,
-  },
-  {
-    OrderID: 845954,
-    CustomerName: 'Penjani',
-    TotalAmount: 59.99,
-    OrderItems: 'Headphone',
-    Location: 'USA',
-    Status: 'complete',
-    StatusBg: '#8BE78B',
-    ProductImage:
-      product4,
-  },
-  {
-    OrderID: 845954,
-    CustomerName: 'Jie Yan',
-    TotalAmount: 87.99,
-    OrderItems: 'Shoes',
-    Location: 'USA',
-    Status: 'pending',
-    StatusBg: '#FB9678',
-    ProductImage:
-      'https://cdn.shopclues.com/images1/thumbnails/104158/320/320/148648730-104158193-1592481791.jpg',
-  },
-  {
-    OrderID: 874534,
-    CustomerName: 'Danai',
-    TotalAmount: 122.99,
-    OrderItems: 'Watch',
-    Location: 'USA',
-    Status: 'canceled',
-    StatusBg: '#FF5C8E',
-    ProductImage:
-      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/pop-womens-garmin-watches-1641919013.jpg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*',
-  },
-  {
-    OrderID: 38489,
-    CustomerName: 'Miron',
-    TotalAmount: 87.99,
-    OrderItems: 'Ice Cream',
-    Location: 'USA',
-    Status: 'active',
-    StatusBg: '#03C9D7',
-    ProductImage:
-      'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/dairy-free-ice-cream-eae372d.jpg',
-  },
-  {
-    OrderID: 24546,
-    CustomerName: 'Frank',
-    TotalAmount: 84.99,
-    OrderItems: 'Pan Cake',
-    Location: 'Delhi',
-    Status: 'complete',
-    StatusBg: '#8BE78B',
-    ProductImage:
-      'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80',
-  },
-  {
-    OrderID: 874534,
-    CustomerName: 'Danai',
+    DeliveryDate: 'Jan 1, 2020 at 12:00 PM',
+    Supplier: 'Vinet',
+    DeliveryGuy: 'Vinet',
+    Rating: '4.5',
     TotalAmount: 122.99,
     OrderItems: 'Watch',
     Location: 'USA',

@@ -6,16 +6,15 @@ import { Header } from '../components';
 
 const Customers = () => {
   const selectionsettings = { persistSelection: true };
-  const toolbarOptions = ['Delete'];
+  const toolbarOptions = ['Delete', 'Edit', 'Update', 'Cancel'];
   const editing = { allowDeleting: true, allowEditing: true };
-  const commands = [{ type: 'Edit', buttonOption: { iconCss: ' e-icons e-edit', cssClass: 'e-flat' } },
-    { type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } },
-    { type: 'Save', buttonOption: { iconCss: 'e-icons e-update', cssClass: 'e-flat' } },
-    { type: 'Cancel', buttonOption: { iconCss: 'e-icons e-cancel-icon', cssClass: 'e-flat' } }];
+  const commands = [
+    // add a custom button
+    { type: 'custom', buttonOption: { content: '<div style="background: #e4e7ef; color: #09276a; padding: 7px; display: flex; align-items: center; justify-content: center; border-radius: 2px; font-family: Roboto; font-weight: 500;" class="e-icons e-add-icon">View Profile</div>', cssClass: 'e-flat' } }];
 
   return (
-    <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Page" title="Customers" />
+    <div className="m-2 md:m-4 mt-24 p-2 md:p-4 bg-white rounded-3xl">
+      <Header category="Check all the registered customers in your system." title="Register Customers" />
       <GridComponent
         dataSource={customersData}
         enableHover={false}
@@ -29,7 +28,7 @@ const Customers = () => {
         <ColumnsDirective>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
           {customersGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}
-          <ColumnDirective headerText="Manage Records" width="160" commands={commands} />
+          <ColumnDirective headerText="Action" width="100" commands={commands} />
         </ColumnsDirective>
         <Inject services={[Page, Selection, Toolbar, Edit, Sort, Filter, CommandColumn]} />
       </GridComponent>

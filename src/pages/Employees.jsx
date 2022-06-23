@@ -1,11 +1,11 @@
 import React from 'react';
-import { GridComponent, Inject, ColumnsDirective, ColumnDirective, Search, Page, CommandColumn } from '@syncfusion/ej2-react-grids';
+import { GridComponent, Inject, ColumnsDirective, ColumnDirective, Search, Page, Toolbar, CommandColumn } from '@syncfusion/ej2-react-grids';
 
 import { employeesData, employeesGrid } from '../data/dummy';
 import { Header } from '../components';
 
 const Employees = () => {
-  // const toolbarOptions = ['Search', 'Add', 'PdfExport', 'Edit', 'Delete'];
+  const toolbarOptions = ['Search', 'Add', 'PdfExport', 'Edit', 'Delete'];
 
   const editing = { allowDeleting: true, allowEditing: true };
   const commands = [{ type: 'Edit', buttonOption: { iconCss: ' e-icons e-edit', cssClass: 'e-flat' } },
@@ -22,14 +22,14 @@ const Employees = () => {
         allowSorting
         pageSettings={{ pageCount: 5 }}
         editSettings={editing}
-        // toolbar={toolbarOptions}
+        toolbar={toolbarOptions}
       >
         <ColumnsDirective>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
           {employeesGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}
           <ColumnDirective headerText="Manage Records" width="160" commands={commands} />
         </ColumnsDirective>
-        <Inject services={[Search, Page, CommandColumn]} />
+        <Inject services={[Search, Page, Toolbar, CommandColumn]} />
 
       </GridComponent>
     </div>

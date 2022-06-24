@@ -3,14 +3,17 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import { FiSettings } from 'react-icons/fi';
 // import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
-import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
-import { Ecommerce, Orders, Employees, Stacked, Pyramid, Customers, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping } from './pages';
+import { Navbar, Sidebar, ThemeSettings } from './components';
+import { Ecommerce, Suppliers, DeliveryGuys, Orders, Employees, Stacked, Pyramid, Customers, Line, Area, Bar, Pie, Financial, ColorMapping } from './pages';
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
+import AddSupplier from './pages/SupplierSubPages/AddSupplier';
+import AddDeliveryGuy from './pages/DeliveryGuysSubPages/AddDeliveryGuy';
+import AddEmployee from './pages/EmployeesSubPages/AddEmployee';
 
 const App = () => {
-  const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
+  const { setCurrentColor, setCurrentMode, currentMode, activeMenu, themeSettings } = useStateContext();
 
   useEffect(() => {
     const currentThemeColor = localStorage.getItem('colorMode');
@@ -22,9 +25,9 @@ const App = () => {
   }, []);
 
   return (
-    <div className={currentMode === 'Dark' ? 'dark' : ''}>
+    <div className={currentMode === 'Dark' ? 'dark h-full' : 'h-full'}>
       <BrowserRouter>
-        <div className="flex relative dark:bg-main-dark-bg">
+        <div className="flex relative dark:bg-main-dark-bg h-full">
           {/* <div className="fixed right-4 bottom-4" style={{ zIndex: '1000' }}>
             <TooltipComponent
               content="Settings"
@@ -53,32 +56,29 @@ const App = () => {
           <div
             className={
               activeMenu
-                ? 'dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  '
-                : 'bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 '
+                ? 'dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full h-full  '
+                : 'bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 h-full '
             }
           >
             <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
               <Navbar />
             </div>
-            <div>
+            <div className="h-full">
               {themeSettings && (<ThemeSettings />)}
 
               <Routes>
                 {/* dashboard  */}
                 <Route path="/" element={(<Ecommerce />)} />
                 <Route path="/dashboard" element={(<Ecommerce />)} />
-
                 {/* pages  */}
                 <Route path="/orders" element={<Orders />} />
-                <Route path="/employees" element={<Employees />} />
                 <Route path="/customers" element={<Customers />} />
-
-                {/* apps  */}
-                {/* <Route path="/kanban" element={<Kanban />} /> */}
-                {/* <Route path="/editor" element={<Editor />} /> */}
-                {/* <Route path="/calendar" element={<Calendar />} /> */}
-                <Route path="/color-picker" element={<ColorPicker />} />
-
+                <Route path="/suppliers" element={<Suppliers />} />
+                <Route path="/suppliers/add" element={<AddSupplier />} />
+                <Route path="/deliveryguys" element={<DeliveryGuys />} />
+                <Route path="/deliveryguys/add" element={<AddDeliveryGuy />} />
+                <Route path="/employees" element={<Employees />} />
+                <Route path="/employees/add" element={<AddEmployee />} />
                 {/* charts  */}
                 <Route path="/line" element={<Line />} />
                 <Route path="/area" element={<Area />} />
@@ -91,7 +91,7 @@ const App = () => {
 
               </Routes>
             </div>
-            <Footer />
+            {/* <Footer /> */}
           </div>
         </div>
       </BrowserRouter>

@@ -2,11 +2,12 @@ import React from 'react';
 import { GridComponent, ColumnsDirective, ColumnDirective, Page, Selection, Inject, Edit, Toolbar, Sort, Filter, CommandColumn } from '@syncfusion/ej2-react-grids';
 import { Link } from 'react-router-dom';
 
-import { customersData, employeesWorkGrid } from '../data/dummy';
+import { customersData, deliveryGuysGrid } from '../data/dummy';
 import { Button, Header } from '../components';
 import { useStateContext } from '../contexts/ContextProvider';
 
-const Employees = () => {
+
+const DeliveryGuys = () => {
   const selectionsettings = { persistSelection: true };
   const toolbarOptions = ['Delete', 'Edit', 'Update', 'Cancel'];
   const editing = { allowDeleting: true, allowEditing: true };
@@ -18,15 +19,19 @@ const Employees = () => {
   return (
     <div className="m-2 md:m-4 mt-24 p-2 md:p-4 bg-white rounded-3xl">
       <div className="flex justify-between">
-        <Header category="Check all the employees in your system." title="Manage Employees" />
-        <Link to="/employees/add">
+        <Header category="Check all the delivery guys in your system." title="Delivery Guys" />
+        <Link to="/deliveryguys/add">
           <Button
             height={10}
+            // onClick={(e) => {
+            //   e.preventDefault();
+            //   window.location.href = '/suppliers/add';
+            // }}
             bgColor="#E4E7EF"
             bold="bold"
             color={currentColor}
             width={36}
-            text="Add Employee"
+            text="Add Rider"
             size={14}
           />
         </Link>
@@ -43,7 +48,7 @@ const Employees = () => {
       >
         <ColumnsDirective>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          {employeesWorkGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}
+          {deliveryGuysGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}
           <ColumnDirective headerText="Action" width="100" commands={commands} />
         </ColumnsDirective>
         <Inject services={[Page, Selection, Toolbar, Edit, Sort, Filter, CommandColumn]} />
@@ -52,4 +57,4 @@ const Employees = () => {
   );
 };
 
-export default Employees;
+export default DeliveryGuys;

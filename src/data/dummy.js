@@ -8,7 +8,7 @@ import { RiContactsLine, RiStockLine } from 'react-icons/ri';
 import { MdOutlineSupervisorAccount } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { TiTick } from 'react-icons/ti';
-import { GiLouvrePyramid } from 'react-icons/gi';
+// import { GiLouvrePyramid } from 'react-icons/gi';
 import { GrLocation } from 'react-icons/gr';
 import avatar from './avatar.jpg';
 import avatar2 from './avatar2.jpg';
@@ -21,7 +21,7 @@ import product4 from './product4.jpg';
 import product5 from './product5.jpg';
 import product6 from './product6.jpg';
 import product7 from './product7.jpg';
-import product8 from './product8.jpg';
+// import product8 from './product8.jpg';
 
 export const gridOrderImage = (props) => (
   <div>
@@ -166,6 +166,11 @@ export const EditorData = () => (
 
       We recommend going through this JavaScript overview to check your knowledge level. It will take you between 30 minutes and an hour but you will feel more confident learning React.
     </h3>
+  </div>
+);
+const deliveryGuysGridWallet = (props) => (
+  <div className="border-1 pt-2 pb-2">
+    {props.Revenue}
   </div>
 );
 const customerGridImage = (props) => (
@@ -521,6 +526,122 @@ export const customersGrid = [
     format: 'yMd',
     textAlign: 'Center',
     template: customerGridStatus },
+];
+export const suppliersGrid = [
+  { type: 'checkbox', width: '50' },
+  {
+    headerText: 'Image',
+    template: customerGridImage,
+    textAlign: 'Center',
+    width: '70',
+  },
+  { headerText: 'Name',
+    width: '120',
+    field: 'CustomerName',
+    // template: customerGridImage,
+    textAlign: 'Center' },
+  { headerText: 'Email',
+    width: '120',
+    field: 'CustomerEmail',
+    // template: customerGridImage,
+    textAlign: 'Center' },
+  { field: 'CustomerID',
+    headerText: 'Phone Number',
+    width: '120',
+    textAlign: 'Center',
+    isPrimaryKey: true,
+  },
+  { field: 'ProjectName',
+    headerText: 'Registeration Date',
+    width: '150',
+    textAlign: 'Center' },
+  { field: 'Status',
+    headerText: 'Status',
+    width: '90',
+    format: 'yMd',
+    textAlign: 'Center',
+    template: customerGridStatus },
+  { field: 'Revenue',
+    headerText: 'Revenue',
+    width: '90',
+    format: 'C2',
+    textAlign: 'Center' },
+];
+export const deliveryGuysGrid = [
+  { type: 'checkbox', width: '50' },
+  {
+    headerText: 'Image',
+    template: customerGridImage,
+    textAlign: 'Center',
+    width: '70',
+  },
+  { headerText: 'Name',
+    width: '120',
+    field: 'CustomerName',
+    // template: customerGridImage,
+    textAlign: 'Center' },
+  { field: 'Revenue',
+    headerText: 'Wallet',
+    width: '90',
+    template: deliveryGuysGridWallet,
+    format: 'C2',
+    textAlign: 'Center' },
+  { headerText: 'Email',
+    width: '120',
+    field: 'CustomerEmail',
+    // template: customerGridImage,
+    textAlign: 'Center' },
+  { field: 'CustomerID',
+    headerText: 'Phone Number',
+    width: '120',
+    textAlign: 'Center',
+    isPrimaryKey: true,
+  },
+  { field: 'ProjectName',
+    headerText: 'Registeration Date',
+    width: '150',
+    textAlign: 'Center' },
+  { field: 'Status',
+    headerText: 'Status',
+    width: '90',
+    format: 'yMd',
+    textAlign: 'Center',
+    template: customerGridStatus },
+];
+export const employeesWorkGrid = [
+  { type: 'checkbox', width: '50' },
+  {
+    headerText: 'Image',
+    template: customerGridImage,
+    textAlign: 'Center',
+    width: '70',
+  },
+  { headerText: 'Name',
+    width: '120',
+    field: 'CustomerName',
+    // template: customerGridImage,
+    textAlign: 'Center' },
+  { headerText: 'Email',
+    width: '120',
+    field: 'CustomerEmail',
+    // template: customerGridImage,
+    textAlign: 'Center' },
+  { field: 'CustomerID',
+    headerText: 'Phone Number',
+    width: '120',
+    textAlign: 'Center',
+    isPrimaryKey: true,
+  },
+  { field: 'Status',
+    headerText: 'Status',
+    width: '90',
+    format: 'yMd',
+    textAlign: 'Center',
+    template: customerGridStatus },
+  { field: 'ProjectName',
+    headerText: 'Role',
+    width: '150',
+    textAlign: 'Center' },
 ];
 export const employeesGrid1 = [
   { headerText: 'Name',
@@ -1127,6 +1248,7 @@ export const customersData = [
     Weeks: '40',
     Budget: '$2.4k',
     Location: 'India',
+    Revenue: '$34,000',
   },
   {
     CustomerID: 1002,
@@ -1134,6 +1256,7 @@ export const customersData = [
     CustomerName: 'Sunil Joshi',
     CustomerEmail: 'sunil@gmail.com',
     ProjectName: 'Elite Admin',
+    Revenue: '$34,000',
     Status: 'Active',
     CustomerImage:
       avatar3,
@@ -1149,6 +1272,7 @@ export const customersData = [
     CustomerName: 'Andrew McDownland',
     CustomerEmail: 'andrew@gmail.com',
     ProjectName: 'Real Homes WP Theme',
+    Revenue: '$34,000',
     Status: 'Pending',
     CustomerImage:
       avatar4,
@@ -1162,6 +1286,7 @@ export const customersData = [
 
     CustomerName: 'Christopher Jamil',
     CustomerEmail: 'jamil@gmail.com',
+    Revenue: '$34,000',
     ProjectName: 'MedicalPro WP Theme',
     Status: 'Completed',
     CustomerImage:
@@ -1177,6 +1302,7 @@ export const customersData = [
     CustomerName: 'Michael',
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
+    Revenue: '$34,000',
     Status: 'Cancel',
     CustomerImage:
       avatar2,
@@ -1189,6 +1315,7 @@ export const customersData = [
     CustomerID: 1006,
     CustomerName: 'Nirav Joshi',
     CustomerEmail: 'nirav@gmail.com',
+    Revenue: '$34,000',
     CustomerImage:
       avatar2,
     ProjectName: 'Hosting Press HTML',
@@ -1205,6 +1332,7 @@ export const customersData = [
     CustomerEmail: 'sunil@gmail.com',
     ProjectName: 'Elite Admin',
     Status: 'Active',
+    Revenue: '$34,000',
     CustomerImage:
       avatar3,
 
@@ -1219,6 +1347,7 @@ export const customersData = [
     CustomerName: 'Andrew McDownland',
     CustomerEmail: 'andrew@gmail.com',
     ProjectName: 'Real Homes WP Theme',
+    Revenue: '$34,000',
     Status: 'Pending',
     CustomerImage:
       avatar4,
@@ -1231,6 +1360,7 @@ export const customersData = [
     CustomerID: 1009,
 
     CustomerName: 'Christopher Jamil',
+    Revenue: '$34,000',
     CustomerEmail: 'jamil@gmail.com',
     ProjectName: 'MedicalPro WP Theme',
     Status: 'Completed',
@@ -1247,6 +1377,7 @@ export const customersData = [
     CustomerName: 'Michael',
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
+    Revenue: '$34,000',
     Status: 'Cancel',
     CustomerImage:
       avatar2,
@@ -1259,6 +1390,7 @@ export const customersData = [
     CustomerID: 1011,
     CustomerName: 'Nirav Joshi',
     CustomerEmail: 'nirav@gmail.com',
+    Revenue: '$34,000',
     CustomerImage:
       avatar2,
     ProjectName: 'Hosting Press HTML',
@@ -1273,6 +1405,7 @@ export const customersData = [
 
     CustomerName: 'Sunil Joshi',
     CustomerEmail: 'sunil@gmail.com',
+    Revenue: '$34,000',
     ProjectName: 'Elite Admin',
     Status: 'Active',
     CustomerImage:
@@ -1288,6 +1421,7 @@ export const customersData = [
 
     CustomerName: 'Andrew McDownland',
     CustomerEmail: 'andrew@gmail.com',
+    Revenue: '$34,000',
     ProjectName: 'Real Homes WP Theme',
     Status: 'Pending',
     CustomerImage:
@@ -1299,6 +1433,7 @@ export const customersData = [
   },
   {
     CustomerID: 1014,
+    Revenue: '$34,000',
 
     CustomerName: 'Christopher Jamil',
     CustomerEmail: 'jamil@gmail.com',
@@ -1317,6 +1452,7 @@ export const customersData = [
     CustomerName: 'Michael',
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
+    Revenue: '$34,000',
     Status: 'Cancel',
     CustomerImage:
       avatar2,
@@ -1329,6 +1465,7 @@ export const customersData = [
     CustomerID: 1016,
     CustomerName: 'Nirav Joshi',
     CustomerEmail: 'nirav@gmail.com',
+    Revenue: '$34,000',
     CustomerImage:
       avatar2,
     ProjectName: 'Hosting Press HTML',
@@ -1344,6 +1481,7 @@ export const customersData = [
     CustomerName: 'Sunil Joshi',
     CustomerEmail: 'sunil@gmail.com',
     ProjectName: 'Elite Admin',
+    Revenue: '$34,000',
     Status: 'Active',
     CustomerImage:
       avatar3,
@@ -1358,6 +1496,7 @@ export const customersData = [
 
     CustomerName: 'Andrew McDownland',
     CustomerEmail: 'andrew@gmail.com',
+    Revenue: '$34,000',
     ProjectName: 'Real Homes WP Theme',
     Status: 'Pending',
     CustomerImage:
@@ -1371,6 +1510,7 @@ export const customersData = [
     CustomerID: 1019,
 
     CustomerName: 'Christopher Jamil',
+    Revenue: '$34,000',
     CustomerEmail: 'jamil@gmail.com',
     ProjectName: 'MedicalPro WP Theme',
     Status: 'Completed',
@@ -1387,6 +1527,7 @@ export const customersData = [
     CustomerName: 'Michael',
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
+    Revenue: '$34,000',
     Status: 'Cancel',
     CustomerImage:
       avatar2,
@@ -1399,6 +1540,7 @@ export const customersData = [
     CustomerID: 1021,
     CustomerName: 'Nirav Joshi',
     CustomerEmail: 'nirav@gmail.com',
+    Revenue: '$34,000',
     CustomerImage:
       avatar2,
     ProjectName: 'Hosting Press HTML',
@@ -1414,6 +1556,7 @@ export const customersData = [
     CustomerName: 'Sunil Joshi',
     CustomerEmail: 'sunil@gmail.com',
     ProjectName: 'Elite Admin',
+    Revenue: '$34,000',
     Status: 'Active',
     CustomerImage:
       avatar3,
@@ -1427,6 +1570,7 @@ export const customersData = [
     CustomerID: 1023,
 
     CustomerName: 'Andrew McDownland',
+    Revenue: '$34,000',
     CustomerEmail: 'andrew@gmail.com',
     ProjectName: 'Real Homes WP Theme',
     Status: 'Pending',
@@ -1443,6 +1587,7 @@ export const customersData = [
     CustomerName: 'Christopher Jamil',
     CustomerEmail: 'jamil@gmail.com',
     ProjectName: 'MedicalPro WP Theme',
+    Revenue: '$34,000',
     Status: 'Completed',
     CustomerImage:
       avatar,
@@ -1455,6 +1600,7 @@ export const customersData = [
     CustomerID: 1025,
 
     CustomerName: 'Michael',
+    Revenue: '$34,000',
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
     Status: 'Cancel',
@@ -1468,6 +1614,7 @@ export const customersData = [
   {
     CustomerID: 1026,
     CustomerName: 'Nirav Joshi',
+    Revenue: '$34,000',
     CustomerEmail: 'nirav@gmail.com',
     CustomerImage:
       avatar2,
@@ -1482,6 +1629,7 @@ export const customersData = [
     CustomerID: 1027,
 
     CustomerName: 'Sunil Joshi',
+    Revenue: '$34,000',
     CustomerEmail: 'sunil@gmail.com',
     ProjectName: 'Elite Admin',
     Status: 'Active',
@@ -1498,6 +1646,7 @@ export const customersData = [
 
     CustomerName: 'Andrew McDownland',
     CustomerEmail: 'andrew@gmail.com',
+    Revenue: '$34,000',
     ProjectName: 'Real Homes WP Theme',
     Status: 'Pending',
     CustomerImage:
@@ -1512,6 +1661,7 @@ export const customersData = [
 
     CustomerName: 'Christopher Jamil',
     CustomerEmail: 'jamil@gmail.com',
+    Revenue: '$34,000',
     ProjectName: 'MedicalPro WP Theme',
     Status: 'Completed',
     CustomerImage:
@@ -1528,6 +1678,7 @@ export const customersData = [
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
     Status: 'Cancel',
+    Revenue: '$34,000',
     CustomerImage:
       avatar2,
     StatusBg: 'red',
@@ -1539,6 +1690,7 @@ export const customersData = [
     CustomerID: 1031,
     CustomerName: 'Nirav Joshi',
     CustomerEmail: 'nirav@gmail.com',
+    Revenue: '$34,000',
     CustomerImage:
       avatar2,
     ProjectName: 'Hosting Press HTML',
@@ -1554,6 +1706,7 @@ export const customersData = [
     CustomerName: 'Sunil Joshi',
     CustomerEmail: 'sunil@gmail.com',
     ProjectName: 'Elite Admin',
+    Revenue: '$34,000',
     Status: 'Active',
     CustomerImage:
       avatar3,
@@ -1568,6 +1721,7 @@ export const customersData = [
 
     CustomerName: 'Andrew McDownland',
     CustomerEmail: 'andrew@gmail.com',
+    Revenue: '$34,000',
     ProjectName: 'Real Homes WP Theme',
     Status: 'Pending',
     CustomerImage:
@@ -1582,6 +1736,7 @@ export const customersData = [
 
     CustomerName: 'Christopher Jamil',
     CustomerEmail: 'jamil@gmail.com',
+    Revenue: '$34,000',
     ProjectName: 'MedicalPro WP Theme',
     Status: 'Completed',
     CustomerImage:
@@ -1595,6 +1750,7 @@ export const customersData = [
     CustomerID: 1035,
 
     CustomerName: 'Michael',
+    Revenue: '$34,000',
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
     Status: 'Cancel',
@@ -1609,6 +1765,7 @@ export const customersData = [
     CustomerID: 1036,
     CustomerName: 'Nirav Joshi',
     CustomerEmail: 'nirav@gmail.com',
+    Revenue: '$34,000',
     CustomerImage:
       avatar2,
     ProjectName: 'Hosting Press HTML',
@@ -1623,6 +1780,7 @@ export const customersData = [
 
     CustomerName: 'Sunil Joshi',
     CustomerEmail: 'sunil@gmail.com',
+    Revenue: '$34,000',
     ProjectName: 'Elite Admin',
     Status: 'Active',
     CustomerImage:
@@ -1638,6 +1796,7 @@ export const customersData = [
 
     CustomerName: 'Andrew McDownland',
     CustomerEmail: 'andrew@gmail.com',
+    Revenue: '$34,000',
     ProjectName: 'Real Homes WP Theme',
     Status: 'Pending',
     CustomerImage:
@@ -1650,6 +1809,7 @@ export const customersData = [
   {
     CustomerID: 1039,
     CustomerName: 'Christopher Jamil',
+    Revenue: '$34,000',
     CustomerEmail: 'jamil@gmail.com',
     ProjectName: 'MedicalPro WP Theme',
     Status: 'Completed',
@@ -1663,6 +1823,7 @@ export const customersData = [
   {
     CustomerID: 1040,
     CustomerName: 'Michael',
+    Revenue: '$34,000',
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
     Status: 'Cancel',
@@ -1727,7 +1888,7 @@ export const employeesData2 = [
     OrderID: '#12345',
     Customer: 'Nancy Davolio',
     Product: 'Sales Representative',
-    Amount: '234',
+    Amount: 342,
     Supplier: 'John Balleric',
     Status: 'Deactivate',
     Rating: '4.5',
@@ -1736,7 +1897,7 @@ export const employeesData2 = [
     OrderID: '#12345',
     Customer: 'Nasimiyu Danai',
     Product: 'Marketing Head',
-    Amount: '23',
+    Amount: 23,
     Supplier: 'John Balleric',
     Status: 'Paid',
     Rating: '4.5',
@@ -1745,7 +1906,7 @@ export const employeesData2 = [
     OrderID: '#12345',
     Customer: 'Iulia Albu',
     Product: 'HR',
-    Amount: '234',
+    Amount: 433,
     Supplier: 'John Balleric',
     Status: 'Pending',
     Rating: '4.5',
@@ -1754,7 +1915,7 @@ export const employeesData2 = [
     OrderID: '#12345',
     Customer: 'Siegbert Gottfried',
     Product: 'Marketing Head',
-    Amount: '65',
+    Amount: 364,
     Supplier: 'John Balleric',
     Status: 'Paid',
     Rating: '4.5',
@@ -1763,7 +1924,7 @@ export const employeesData2 = [
     OrderID: '#12345',
     Customer: 'Omar Darobe',
     Product: 'HR',
-    Amount: '44',
+    Amount: 44,
     Supplier: 'John Balleric',
     Status: 'Pending',
     Rating: '4.5',
@@ -1772,7 +1933,7 @@ export const employeesData2 = [
     OrderID: '#12345',
     Customer: 'Penjani Inyene',
     Product: 'Marketing Head',
-    Amount: '453',
+    Amount: 543,
     Supplier: 'John Balleric',
     Status: 'Deactivate',
     Rating: '4.5',

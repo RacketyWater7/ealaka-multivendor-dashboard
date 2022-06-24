@@ -1,24 +1,24 @@
 import React from 'react';
-import { BsCurrencyDollar } from 'react-icons/bs';
-import {AiOutlineUsergroupAdd} from 'react-icons/ai';
-import {MdWork} from 'react-icons/md';
-import {BiGift} from 'react-icons/bi';
-import { GoPrimitiveDot } from 'react-icons/go';
-import { IoIosMore, IoMdBicycle } from 'react-icons/io';
-import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
+// import { BsCurrencyDollar } from 'react-icons/bs';
+import { AiOutlineUsergroupAdd } from 'react-icons/ai';
+import { MdWork } from 'react-icons/md';
+import { BiGift } from 'react-icons/bi';
+// import { GoPrimitiveDot } from 'react-icons/go';
+import { IoMdBicycle } from 'react-icons/io';
+// import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, DateTime, SplineAreaSeries, Legend } from '@syncfusion/ej2-react-charts';
 import { GridComponent, ColumnsDirective, ColumnDirective, Search, Page, CommandColumn } from '@syncfusion/ej2-react-grids';
 
-import { Stacked, Pie, Button, LineChart, SparkLine } from '../components';
-import { employeesData1, employeesGrid2, employeesData2, employeesGrid1, employeesData3, employeesGrid3, areaCustomSeries, areaPrimaryXAxis, areaPrimaryYAxis, medicalproBranding, recentTransactions, weeklyStats, dropdownData, SparklineAreaData, ecomPieChartData } from '../data/dummy';
+// import { Stacked, Pie, Button, LineChart, SparkLine } from '../components';
+import { employeesData1, employeesGrid2, employeesData2, employeesGrid1, employeesData3, employeesGrid3, areaCustomSeries, areaPrimaryXAxis, areaPrimaryYAxis } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
-import product9 from '../data/product9.jpg';
+// import product9 from '../data/product9.jpg';
 
-const DropDown = ({ currentMode }) => (
-  <div className="w-28 border-1 border-color px-2 py-1 rounded-md">
-    <DropDownListComponent id="time" fields={{ text: 'Time', value: 'Id' }} style={{ border: 'none', color: (currentMode === 'Dark') && 'white' }} value="1" dataSource={dropdownData} popupHeight="220px" popupWidth="120px" />
-  </div>
-);
+// const DropDown = ({ currentMode }) => (
+//   <div className="w-28 border-1 border-color px-2 py-1 rounded-md">
+//     <DropDownListComponent id="time" fields={{ text: 'Time', value: 'Id' }} style={{ border: 'none', color: (currentMode === 'Dark') && 'white' }} value="1" dataSource={dropdownData} popupHeight="220px" popupWidth="120px" />
+//   </div>
+// );
 
 const Ecommerce = () => {
   const { currentColor, currentMode, secondaryColor } = useStateContext();

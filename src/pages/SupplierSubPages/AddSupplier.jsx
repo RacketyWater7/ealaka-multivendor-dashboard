@@ -147,15 +147,9 @@ const AddSupplier = () => {
                   </option>
                   <option value="1">Fruits</option>
                 </select>
-                <img
-                  style={{ width: "11px", height: "7px" }}
-                  className="relative -left-8 top-7"
-                  src="/images/arrow_down.png"
-                  alt="<"
-                />
               </span>
             </div>
-            <div className="flex flex-col relative -left-3">
+            <div className="flex flex-col">
               <p
                 style={{
                   color: `${currentColor}`,
@@ -191,15 +185,9 @@ const AddSupplier = () => {
                   </option>
                   <option value="1">Zone 2</option>
                 </select>
-                <img
-                  style={{ width: "11px", height: "7px" }}
-                  className="relative -left-8 top-7"
-                  src="/images/arrow_down.png"
-                  alt="<"
-                />
               </span>
             </div>
-            <div className="flex flex-col relative -left-5">
+            <div className="flex flex-col">
               <p
                 style={{
                   color: `${currentColor}`,

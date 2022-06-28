@@ -146,12 +146,6 @@ const AddEmployee = () => {
                 <option value="1">Standard</option>
                 <option value="0">Advanced</option>
               </select>
-              <img
-                style={{ width: "11px", height: "7px" }}
-                className="relative -left-8 top-7"
-                src="/images/arrow_down.png"
-                alt="<"
-              />
             </span>
           </div>
           <Link to="/employees">

@@ -35,6 +35,10 @@ import Categories from "./pages/Categories";
 import AddCategory from "./pages/CategoriesSubPages/AddCategory";
 import Attributes from "./pages/Attributes";
 import AddAttribute from "./pages/AttributesSubPages/AddAttribute";
+import Promotion from "./pages/Promotion";
+import ChooseSupplier from "./pages/PromotionSubPages/ChooseSupplier";
+import Products from "./pages/PromotionSubPages/Products/Products";
+import AddPromotion from "./pages/PromotionSubPages/Products/AddPromotion/AddPromotion";
 
 const App = () => {
   const {
@@ -52,7 +56,7 @@ const App = () => {
       setCurrentColor(currentThemeColor);
       setCurrentMode(currentThemeMode);
     }
-  }, []);
+  }, [setCurrentColor, setCurrentMode]);
 
   return (
     <div className={currentMode === "Dark" ? "dark h-full" : "h-full"}>
@@ -125,6 +129,20 @@ const App = () => {
 
                 <Route path="/attributes" element={<Attributes />} />
                 <Route path="/attributes/add" element={<AddAttribute />} />
+
+                <Route path="/promotion" element={<Promotion />} />
+                <Route
+                  path="/promotion/suppliers"
+                  element={<ChooseSupplier />}
+                />
+                <Route
+                  path="/promotion/suppliers/:id/products"
+                  element={<Products />}
+                />
+                <Route
+                  path="/promotion/suppliers/:id/products/add"
+                  element={<AddPromotion />}
+                />
 
                 <Route path="/settings" element={<Settings />} />
                 {/* charts  */}

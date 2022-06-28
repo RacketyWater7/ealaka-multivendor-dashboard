@@ -68,9 +68,11 @@ const Sidebar = () => {
                         ? "/categories"
                         : link.name === "manage attributes"
                         ? "/attributes"
+                        : link.name === "manage promotion"
+                        ? "/promotion"
                         : `/${link.name.split(" ").join("")}`
                     }
-                    key={link.name}
+                    key={i}
                     onClick={handleCloseSideBar}
                     // style={({ isActive }) => ({
                     //   backgroundColor: isActive ? "" : '',

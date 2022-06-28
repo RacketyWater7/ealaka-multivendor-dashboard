@@ -29,7 +29,7 @@ const AddDeliveryGuy = () => {
       />
       {/* make a div with dropshadow blur 9 */}
       <div
-        style={{ height: "100vh" }}
+        style={{ height: "110vh" }}
         className="bg-white w-full md:mr-2 md:ml-2 md:mt-2 border-1 pl-4 pt-6"
       >
         <form className="ml-4">
@@ -93,12 +93,6 @@ const AddDeliveryGuy = () => {
                   Contract
                 </option>
               </select>
-              <img
-                style={{ width: "11px", height: "7px" }}
-                className="relative -left-8 top-7"
-                src="/images/arrow_down.png"
-                alt="<"
-              />
             </span>
           </div>
           <div className="flex mt-8 gap-5">
@@ -270,15 +264,9 @@ const AddDeliveryGuy = () => {
                     Zone 2
                   </option>
                 </select>
-                <img
-                  style={{ width: "11px", height: "7px" }}
-                  className="relative -left-8 top-7"
-                  src="/images/arrow_down.png"
-                  alt="<"
-                />
               </span>
             </div>
-            <div className="flex flex-col relative -left-2">
+            <div className="flex flex-col ">
               <p
                 style={{
                   color: `${currentColor}`,

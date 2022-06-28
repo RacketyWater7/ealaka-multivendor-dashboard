@@ -53,10 +53,6 @@ const Categories = () => {
         <Link to="/categories/add">
           <Button
             height={10}
-            // onClick={(e) => {
-            //   e.preventDefault();
-            //   window.location.href = '/suppliers/add';
-            // }}
             bgColor="#E4E7EF"
             bold="bold"
             color={currentColor}

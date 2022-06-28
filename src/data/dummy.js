@@ -747,6 +747,7 @@ export const employeesWorkGrid = [
     textAlign: "Center",
   },
 ];
+
 export const attributesWorkGrid = [
   { type: "checkbox", width: "50" },
   {
@@ -1399,6 +1400,43 @@ export const ordersGrid = [
     textAlign: "Center",
   },
 ];
+export const productsGrid = [
+  { type: "checkbox", width: "50" },
+  {
+    headerText: "Image",
+    template: gridOrderImage,
+    textAlign: "Center",
+    width: "90",
+  },
+  {
+    field: "OrderItems",
+    headerText: "Product Name",
+    width: "150",
+    textAlign: "Center",
+  },
+  {
+    field: "TotalAmount",
+    headerText: "Price",
+    format: "C2",
+    textAlign: "Center",
+    headerTextAlign: "Center",
+    editType: "numericedit",
+    width: "120",
+  },
+  {
+    headerText: "Status",
+    template: gridOrderStatus,
+    field: "Status",
+    textAlign: "Center",
+    width: "100",
+  },
+  {
+    field: "Rating",
+    headerText: "Rating",
+    width: "50",
+    textAlign: "Center",
+  },
+];
 export const categoriesData = [
   {
     CategoryName: "Vegetables",
@@ -1425,7 +1463,54 @@ export const categoriesData = [
     StatusBg: "#8BE78B",
   },
 ];
+export const zonesData = [
+  {
+    CustomerID: 1001,
+    CustomerName: "Nirav Joshi",
+    CustomerEmail: "nirav@gmail.com",
+    Title: "Zone 1",
+    CustomerImage: avatar2,
+    ProjectName: "Hosting Press HTML",
+    Status: "Active",
+    StatusBg: "#8BE78B",
+    Weeks: "40",
+    Budget: "$2.4k",
+    Location: "India",
+    Revenue: "$34,000",
+  },
+  {
+    CustomerID: 1002,
 
+    CustomerName: "Sunil Joshi",
+    CustomerEmail: "sunil@gmail.com",
+    ProjectName: "Elite Admin",
+    Title: "Zone 2",
+    Revenue: "$34,000",
+    Status: "Active",
+    CustomerImage: avatar3,
+
+    StatusBg: "#8BE78B",
+    Weeks: "11",
+    Budget: "$3.9k",
+    Location: "India",
+  },
+  {
+    CustomerID: 1003,
+
+    CustomerName: "Andrew McDownland",
+    CustomerEmail: "andrew@gmail.com",
+    ProjectName: "Real Homes WP Theme",
+    Title: "Zone 3",
+    Revenue: "$34,000",
+
+    Status: "Pending",
+    CustomerImage: avatar4,
+    StatusBg: "#FEC90F",
+    Weeks: "19",
+    Budget: "$24.5k",
+    Location: "USA",
+  },
+];
 export const customersData = [
   {
     CustomerID: 1001,

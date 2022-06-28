@@ -14,7 +14,7 @@ import {
 } from "@syncfusion/ej2-react-grids";
 import { Link } from "react-router-dom";
 
-import { customersData, zonesWorkGrid } from "../data/dummy";
+import { zonesData, zonesWorkGrid } from "../data/dummy";
 import { Button, Header } from "../components";
 import { useStateContext } from "../contexts/ContextProvider";
 
@@ -63,7 +63,7 @@ const Zones = () => {
         </Link>
       </div>
       <GridComponent
-        dataSource={customersData}
+        dataSource={zonesData}
         enableHover={false}
         allowPaging
         pageSettings={{ pageCount: 5 }}

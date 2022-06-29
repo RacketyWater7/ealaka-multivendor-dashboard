@@ -34,11 +34,13 @@ import Settings from "./pages/Settings";
 import Categories from "./pages/Categories";
 import AddCategory from "./pages/CategoriesSubPages/AddCategory";
 import Attributes from "./pages/Attributes";
+import Promotions from "./pages/Promotions";
 import AddAttribute from "./pages/AttributesSubPages/AddAttribute";
-import Promotion from "./pages/Promotion";
 import ChooseSupplier from "./pages/PromotionSubPages/ChooseSupplier";
+import AddPromotion from "./pages/PromotionSubPages/AddPromotion";
 import Products from "./pages/PromotionSubPages/Products/Products";
-import AddPromotion from "./pages/PromotionSubPages/Products/AddPromotion/AddPromotion";
+import AddNewPromotion from "./pages/PromotionSubPages/Products/AddNewPromotion/AddNewPromotion";
+import SupplierProfile from "./pages/SupplierSubPages/SupplierProfile";
 
 const App = () => {
   const {
@@ -110,6 +112,7 @@ const App = () => {
                 <Route path="/customers" element={<Customers />} />
 
                 <Route path="/suppliers" element={<Suppliers />} />
+                <Route path="/suppliers/:id" element={<SupplierProfile />} />
                 <Route path="/suppliers/add" element={<AddSupplier />} />
 
                 <Route path="/deliveryguys" element={<DeliveryGuys />} />
@@ -129,19 +132,20 @@ const App = () => {
 
                 <Route path="/attributes" element={<Attributes />} />
                 <Route path="/attributes/add" element={<AddAttribute />} />
-
-                <Route path="/promotion" element={<Promotion />} />
+                {/* Promotions */}
+                <Route path="/promotions" element={<Promotions />} />
+                <Route path="/promotions/add" element={<AddPromotion />} />
                 <Route
-                  path="/promotion/suppliers"
+                  path="/promotions/add/suppliers"
                   element={<ChooseSupplier />}
                 />
                 <Route
-                  path="/promotion/suppliers/:id/products"
+                  path="/promotions/add/suppliers/:id/products"
                   element={<Products />}
                 />
                 <Route
-                  path="/promotion/suppliers/:id/products/add"
-                  element={<AddPromotion />}
+                  path="/promotions/add/suppliers/:id/products/add"
+                  element={<AddNewPromotion />}
                 />
 
                 <Route path="/settings" element={<Settings />} />

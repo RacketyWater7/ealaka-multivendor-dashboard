@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Header } from "../components";
-import { useStateContext } from "../contexts/ContextProvider";
+import { Header } from "../../components";
+import { useStateContext } from "../../contexts/ContextProvider";
 import { BsArrowRightShort } from "react-icons/bs";
-import { Modal } from "../components";
+import { Modal } from "../../components";
 
-const Promotion = () => {
+const AddPromotion = () => {
   const { currentColor } = useStateContext();
   const [target, setTarget] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -61,7 +61,7 @@ const Promotion = () => {
             />
             <span className="relative -left-12 top-3 hover:bg-indigo-300  duration-300 bg-indigo-200 h-10 w-11 rounded-sm cursor-pointer">
               {" "}
-              <Link to={`/promotion/suppliers?order=${target}`}>
+              <Link to={`/promotions/add/suppliers?order=${target}`}>
                 <BsArrowRightShort
                   color={currentColor}
                   className="w-8 h-8 ml-1.5 mt-1"
@@ -75,4 +75,4 @@ const Promotion = () => {
   );
 };
 
-export default Promotion;
+export default AddPromotion;

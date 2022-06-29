@@ -1,9 +1,22 @@
-import React from 'react';
+import React from "react";
 
-import { useStateContext } from '../contexts/ContextProvider';
+// import { useStateContext } from '../contexts/ContextProvider';
 
-const Button = ({ bgColor, additionClasses, onClick, cssWidth, color, bgHoverColor, size, text, height, borderRadius, bold, width }) => {
-  const { setIsClicked, initialState } = useStateContext();
+const Button = ({
+  bgColor,
+  additionClasses,
+  onClick,
+  cssWidth,
+  color,
+  bgHoverColor,
+  size,
+  text,
+  height,
+  borderRadius,
+  bold,
+  width,
+}) => {
+  // const { setIsClicked, initialState } = useStateContext();
 
   return (
     // <button

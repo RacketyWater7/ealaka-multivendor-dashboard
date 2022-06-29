@@ -68,8 +68,8 @@ const Sidebar = () => {
                         ? "/categories"
                         : link.name === "manage attributes"
                         ? "/attributes"
-                        : link.name === "manage promotion"
-                        ? "/promotion"
+                        : link.name === "manage promotions"
+                        ? "/promotions"
                         : `/${link.name.split(" ").join("")}`
                     }
                     key={i}

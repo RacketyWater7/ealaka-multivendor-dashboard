@@ -3,7 +3,14 @@ import { useStateContext } from "../contexts/ContextProvider";
 import { IoIosClose } from "react-icons/io";
 import { Header } from "../components";
 
-function Modal({ show, headerTitle, headerSubTitle, children }) {
+function Modal({
+  show,
+  headerTitle,
+  headerSubTitle,
+  children,
+  onClose,
+  heading,
+}) {
   const { currentColor } = useStateContext();
 
   useEffect(() => {
@@ -26,7 +33,10 @@ function Modal({ show, headerTitle, headerSubTitle, children }) {
                 <div className="flex items-start justify-between border-solid  rounded-t">
                   <button
                     className="p-1 ml-auto float-right text-3xl leading-none font-semibold "
-                    onClick={() => setShowModal(false)}
+                    onClick={() => {
+                      setShowModal(false);
+                      onClose();
+                    }}
                   >
                     <span className="h-6 w-6 text-2xl block rounded-full bg-indigo-200 hover:bg-indigo-300  duration-300 mr-3 mt-3">
                       <IoIosClose color={currentColor} />
@@ -35,7 +45,9 @@ function Modal({ show, headerTitle, headerSubTitle, children }) {
                 </div>
                 {/*body*/}
                 <span className="flex justify-center">
-                  <Header category={headerSubTitle} title={headerTitle} />
+                  {heading !== false && (
+                    <Header category={headerSubTitle} title={headerTitle} />
+                  )}
                 </span>
                 {children}
               </div>

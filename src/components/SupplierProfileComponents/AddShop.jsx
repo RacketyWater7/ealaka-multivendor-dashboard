@@ -84,7 +84,7 @@ const AddShop = ({ setShop }) => {
                   text-gray-700
                   bg-white bg-clip-padding bg-no-repeat
                   border border-solid border-gray-300
-                  transition
+                  duration-300
                   ease-in-out
                   mt-2
                   focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
@@ -151,7 +151,7 @@ const AddShop = ({ setShop }) => {
           <textarea
             ref={descriptionRef}
             style={{ border: "1px solid #D4D4EC" }}
-            className="w-[600px] h-60 mt-2 p-2"
+            className="w-[600px] h-60 mt-2 p-2 resize-none"
           />
           <div className="mt-8">
             {/* add a checkbox with name Deactivated  */}

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Header } from "../../components";
 import { RiEditLine } from "react-icons/ri";
 import { useStateContext } from "../../contexts/ContextProvider";
@@ -11,6 +12,7 @@ import Orders from "../Orders";
 import ManageShop from "../../components/SupplierProfileComponents/ManageShop";
 
 const SupplierProfile = () => {
+  const navigate = useNavigate();
   const { currentColor } = useStateContext();
   const [activeMenu, setActiveMenu] = React.useState("Manage Shop");
   const [addShop, setAddShop] = React.useState(false);
@@ -155,8 +157,9 @@ const SupplierProfile = () => {
                   bold="bold"
                   color={currentColor}
                   width={36}
-                  text="Add Shop"
+                  text="Add Product"
                   size={14}
+                  onClick={() => navigate("/suppliers/:id/addproduct")}
                 />
               </div>
 

@@ -6,9 +6,10 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
 import { links } from "../data/dummy";
 import { useStateContext } from "../contexts/ContextProvider";
+import { FiLogOut } from "react-icons/fi";
 
 const Sidebar = () => {
-  const { currentColor, activeMenu, setActiveMenu, screenSize } =
+  const { currentColor, activeMenu, setActiveMenu, screenSize, logout } =
     useStateContext();
 
   const handleCloseSideBar = () => {
@@ -70,6 +71,8 @@ const Sidebar = () => {
                         ? "/attributes"
                         : link.name === "manage promotions"
                         ? "/promotions"
+                        : link.name === "logout"
+                        ? "/login"
                         : `/${link.name.split(" ").join("")}`
                     }
                     key={i}
@@ -87,6 +90,12 @@ const Sidebar = () => {
                 ))}
               </div>
             ))}
+            <span
+              onClick={logout}
+              className="flex items-center gap-5 pl-4 pt-3 pb-2.5 font-bold rounded-lg text-md text-slate-500 dark:text-gray-200 dark:hover:text-black hover:text-blue-900 m-2 cursor-pointer"
+            >
+              <FiLogOut /> Logout
+            </span>
           </div>
         </>
       )}

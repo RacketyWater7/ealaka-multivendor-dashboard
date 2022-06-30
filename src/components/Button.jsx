@@ -15,6 +15,7 @@ const Button = ({
   borderRadius,
   bold,
   width,
+  cssSize,
 }) => {
   // const { setIsClicked, initialState } = useStateContext();
 
@@ -30,8 +31,14 @@ const Button = ({
     <button
       type="button"
       onClick={onClick}
-      style={{ backgroundColor: bgColor, color, borderRadius, width: cssWidth }}
-      className={`${additionClasses} text-${size} font-${bold} p-3 w-${width} h-${height} hover:drop-shadow-xl hover:bg-${bgHoverColor}`}
+      style={{
+        backgroundColor: bgColor,
+        color,
+        borderRadius,
+        width: cssWidth,
+        fontSize: cssSize,
+      }}
+      className={`${additionClasses}  text-${size} font-${bold} p-3 w-${width} h-${height} hover:drop-shadow-xl hover:bg-${bgHoverColor}`}
     >
       {text}
     </button>

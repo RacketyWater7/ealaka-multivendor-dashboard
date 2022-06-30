@@ -41,9 +41,12 @@ import AddPromotion from "./pages/PromotionSubPages/AddPromotion";
 import Products from "./pages/PromotionSubPages/Products/Products";
 import AddNewPromotion from "./pages/PromotionSubPages/Products/AddNewPromotion/AddNewPromotion";
 import SupplierProfile from "./pages/SupplierSubPages/SupplierProfile";
+import AddProduct from "./components/SupplierProfileComponents/AddProduct";
+import Login from "./components/Login";
 
 const App = () => {
   const {
+    user,
     setCurrentColor,
     setCurrentMode,
     currentMode,
@@ -80,14 +83,18 @@ const App = () => {
 
             </TooltipComponent>
           </div> */}
-          {activeMenu ? (
-            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
-              <Sidebar />
-            </div>
-          ) : (
-            <div className="w-0 dark:bg-secondary-dark-bg">
-              <Sidebar />
-            </div>
+          {user && (
+            <>
+              {activeMenu ? (
+                <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
+                  <Sidebar />
+                </div>
+              ) : (
+                <div className="w-0 dark:bg-secondary-dark-bg">
+                  <Sidebar />
+                </div>
+              )}
+            </>
           )}
           <div
             className={
@@ -113,6 +120,10 @@ const App = () => {
 
                 <Route path="/suppliers" element={<Suppliers />} />
                 <Route path="/suppliers/:id" element={<SupplierProfile />} />
+                <Route
+                  path="/suppliers/:id/addproduct"
+                  element={<AddProduct />}
+                />
                 <Route path="/suppliers/add" element={<AddSupplier />} />
 
                 <Route path="/deliveryguys" element={<DeliveryGuys />} />
@@ -158,6 +169,9 @@ const App = () => {
                 <Route path="/color-mapping" element={<ColorMapping />} />
                 <Route path="/pyramid" element={<Pyramid />} />
                 <Route path="/stacked" element={<Stacked />} />
+
+                {/* login */}
+                <Route path="/login" element={<Login />} />
               </Routes>
             </div>
             {/* <Footer /> */}

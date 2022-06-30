@@ -10,7 +10,6 @@ import {
   FiBarChart,
   FiSettings,
   FiImage,
-  FiLogOut,
   FiCreditCard,
   FiStar,
   FiShoppingCart,
@@ -1074,10 +1073,6 @@ export const links = [
       {
         name: "settings",
         icon: <FiSettings />,
-      },
-      {
-        name: "logout",
-        icon: <FiLogOut />,
       },
     ],
   },

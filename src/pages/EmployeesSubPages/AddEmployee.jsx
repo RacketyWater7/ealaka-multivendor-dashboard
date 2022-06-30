@@ -134,7 +134,7 @@ const AddEmployee = () => {
                 text-gray-700
                 bg-white bg-clip-padding bg-no-repeat
                 border border-solid border-gray-300
-                transition
+                duration-300
                 ease-in-out
                 mt-2
                 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
